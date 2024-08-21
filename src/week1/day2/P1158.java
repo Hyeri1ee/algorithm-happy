@@ -1,35 +1,39 @@
 package week1.day2;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 
 public class P1158 {
 
-  static StringBuilder SB = new StringBuilder();
-  static Scanner sc  = new Scanner(System.in);
-  public static void main(String[] args) {
-    Queue<Integer> queue = new LinkedList<>();
+  static StringBuilder sb = new StringBuilder();
+  static BufferedReader sc  = new BufferedReader(new InputStreamReader(System.in));
 
-    int n = sc.nextInt();
-    int m = sc.nextInt();
+  public static void main(String[] args) throws Exception{
+    Queue<Integer> queue = new LinkedList<>();
+    StringTokenizer st = new StringTokenizer(sc.readLine());
+
+    int n = Integer.parseInt(st.nextToken());
+    int m = Integer.parseInt(st.nextToken());
 
     for (int i =0  ; i < n ;i++){
       queue.offer(i+1);
     }
-    SB.append("<");
+    sb.append("<");
     int count = 0;
     while (count < n){
       doit(queue, m);
       if (count != n-1)
-        SB.append(", ");
+        sb.append(", ");
       else
-        SB.append(">");
+        sb.append(">");
       count++;
     }
 
-    System.out.println(SB);
+    System.out.println(sb);
   }
 
   private static void doit(Queue<Integer> queue, int m) {
@@ -40,7 +44,7 @@ public class P1158 {
       queue.offer(theone);
       i++;
     }
-    SB.append(queue.poll());
+    sb.append(queue.poll());
   }
 
 }
