@@ -21,7 +21,6 @@ public class P1966 {
       int total = Integer.parseInt(arr[0]);
       int location = Integer.parseInt(arr[1]);
 
-      StringTokenizer st2 = new StringTokenizer(bf.readLine());
       Queue<Integer> que = new LinkedList<>();
       int max = 0;
       for (int j = 0 ; j < total; j++){
@@ -38,7 +37,6 @@ public class P1966 {
         if (max > peek)
         {//다시 돌아가기
           que.poll();
-          result++;
           que.offer(peek);
           if (theOne == 0)
             theOne += que.size()-1;
@@ -46,22 +44,24 @@ public class P1966 {
             theOne--;
         }
         else { //max == peek
-          theOne--;
-          if (theOne == -1)
-            break;
           que.poll();
+          theOne--;
+          if (theOne == -1){
+            result++;
+            break;
+          }
           result++;
           //max 다시 정하기
           max = 0;
           for (int k = 0 ;  k <que.size() ; k++){
             if (max < que.peek())
               max = que.peek();
-            que.poll();
-            que.offer(peek);
+            int pe = que.poll();
+            que.offer(pe);
           }
         }
       }
-      sb.append(Integer.toString(result+1) + "\n");
+      sb.append(Integer.toString(result) + "\n");
     }
     System.out.println(sb);
   }
