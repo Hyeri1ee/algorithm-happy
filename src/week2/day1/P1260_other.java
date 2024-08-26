@@ -1,83 +1,80 @@
 package week2.day1;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.*;
 
-public class P1260_other {
-
+public class P1260_other{
+  static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
   static StringBuilder sb = new StringBuilder();
-  static boolean[] visited;
-  static int[][] edge;
 
-  static int n, m, v;
-
+  static Stack<Integer> stack = new Stack();
   static Queue<Integer> queue = new LinkedList<>();
+  public static void  main (String[] args) throws IOException {
+    StringTokenizer st = new StringTokenizer(bf.readLine()," ");
+    int n = Integer.parseInt(st.nextToken());//정점 개수
+    int m = Integer.parseInt(st.nextToken());//간선 개수
+    int v = Integer.parseInt(st.nextToken());//시작 정점
 
-  public static void main(String[] args) throws IOException {
+    LinkedList<Integer>[] graph = new LinkedList[n+1];
+    boolean[] visited1 = new boolean[n+1];
+    boolean[] visited2 = new boolean[n+1];
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    StringTokenizer st = new StringTokenizer(br.readLine());
-    n = Integer.parseInt(st.nextToken());
-    m = Integer.parseInt(st.nextToken());
-    v= Integer.parseInt(st.nextToken());
-
-    edge = new int[n+1][n+1]; //n+1을 해주는 이유 : 인덱스 값 = 정점의 수 를 동일시하기 위해서
-    visited = new boolean[n+1];
-
-    for(int i = 0 ; i < n ; i ++) {
-      //공백을 기준으로 나누어 받는 값의 경우 아래 방식이 유용합. (ex. a   b)
-      StringTokenizer str = new StringTokenizer(br.readLine());
-
-      int a = Integer.parseInt(str.nextToken());
-      int b = Integer.parseInt(str.nextToken());
-
-      edge[a][b] = edge[b][a] =  1;
+    //런타임 에러 (graph 초기화)
+    for (int i = 1; i <= n; i++) {
+      graph[i] = new LinkedList<>();
     }
 
-    dfs(v);
-    sb.append("\n");
-    visited = new boolean[n+1]; //새로운 visited 배열을 만들 필요 없이 기존 변수에 새로운 생성자 정의
-
-    bfs(v);
-
-    System.out.println(sb);
-
-  }
-  public static void dfs(int v) {
-
-    visited[v] = true;
-    sb.append(v + " ");
-
-    for(int i = 0 ; i <= n ; i++) {
-      if(edge[v][i] == 1 && !visited[i])
-        dfs(i);//재귀로 구현
+    for (int i = 0; i < m ; i++){
+      st = new StringTokenizer(bf.readLine()," ");
+      int v1 = Integer.parseInt(st.nextToken());
+      int v2 = Integer.parseInt(st.nextToken());
+      graph[v1].add(v2);
+      graph[v2].add(v1);
     }
 
-  }
+    // 방문 순서를 위해 오름차순 정렬 : 점점이 가장 작은 것 부터 봄
+    for (int i = 1; i <= n; i++) {
+      Collections.sort(graph[i]);
+    }
 
-  public static void bfs(int v) {
-    queue.offer(v);
-    visited[v] = true;
+    //dfs 결과
+    stack.push(v);
+    visited1[v] = true;
 
-    while(!queue.isEmpty()) {
+    //스택이 비어있지 않으면 계속 반복
+    while(!stack.isEmpty()){
+      int nodeIndex = stack.pop();
+      visited1[nodeIndex] = true;
+      sb.append(nodeIndex + " ");
 
-      v = queue.poll();
-      sb.append(v + " ");
-
-      for(int i = 1 ; i <= n ; i++) {
-        if(edge[v][i] == 1 && !visited[i]) {
-          queue.offer(i);
-          visited[i] = true;
+      for (int LinkedNode : graph[nodeIndex]){
+        if (!visited1[LinkedNode] && LinkedNode > 0){
+          stack.push(LinkedNode);
+          break;
         }
       }
     }
+    sb.append("\n");
+
+    //bfs 결과
+    visited2[v] = true;
+    queue.offer(v);
+
+    while(!queue.isEmpty()){
+      int nodeIndex = queue.poll();
+      sb.append(nodeIndex +" ");
+
+      for (int LinkedNode : graph[nodeIndex]){
+        if (!visited2[LinkedNode] && LinkedNode >0 ){
+          queue.offer(LinkedNode);
+          visited2[LinkedNode] = true;
+        }
+      }
+    }
+    System.out.print(sb);
+
+
 
 
   }
-
 }
