@@ -3,7 +3,7 @@ package week2.day1;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
-
+// dfs - 스택으로 구현
 public class P1260_2 {
   static StringBuilder sb = new StringBuilder();
   static boolean[] visited;
@@ -35,18 +35,18 @@ public class P1260_2 {
       edge[v1].add(v2);
       edge[v2].add(v1);
     }
-
     // 인접 리스트 정렬
     for (int i = 1; i <= n; i++) {
       Collections.sort(edge[i]);
     }
-
     // DFS 실행
     dfs(v);
     sb.append("\n");
 
     // BFS 전에 방문 배열 초기화
     visited = new boolean[n + 1];
+
+
     bfs(v);
 
     // 최종 출력
@@ -57,16 +57,24 @@ public class P1260_2 {
     Stack<Integer> stack = new Stack<>();
     stack.push(v);
     visited[v] = true;
+    sb.append(v +" ");
 
     while (!stack.isEmpty()) {
-      int popped = stack.pop();
-      sb.append(popped + " ");
+      int n = stack.peek();
+      boolean flag = false;
 
-      for (int node : edge[popped]) {
-        if (!visited[node]) {
+      for (int node : edge[n]){
+        if (!visited[node]){//방문하지 않았다면
           stack.push(node);
           visited[node] = true;
+          flag = true;
+          sb.append(node +" ");
+          break;
         }
+      }
+      //방문할 노드가 없다면
+      if (flag == false){//이 노드는 더 이상 탐색할 필요가 없으므로 스택에서 제거
+        stack.pop();
       }
     }
   }

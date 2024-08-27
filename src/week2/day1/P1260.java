@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-
+//dfs - 재귀로 구현
 public class P1260 {
 
   static StringBuilder sb = new StringBuilder();
