@@ -35,14 +35,15 @@ public class DFS_Array {
   private static void dfs2(int[][] edge,boolean[] visited, int v) {
     Stack<Integer> stack = new Stack<>();
 
-    stack.push(v);
     //시작 노드 방문처리
     visited[v] = true;
+    stack.push(v);
+    sb.append(v + " ");
+
     //스택이 비어있지 않으면 계속 반복
     while(!stack.isEmpty()){
-      int popped = stack.pop();
-      //방문 노드 출력
-      sb.append(popped + " ");
+      int popped = stack.peek();
+      boolean flag = false;
 
       //꺼낸 노드와 인접한 노드 찾기
       for (int node : edge[popped]){//for 문이 백트래킹을 구현해줌
@@ -51,8 +52,13 @@ public class DFS_Array {
         {
           stack.push(node);
           visited[node] = true;
+          flag = true;
+          sb.append(node + " ");
+          break;
         }
       }//for 문 종료후 방문 노드 출력은 해당 노드가 leaf일때 || 방문하지 않은 노드가 없을때
+      if (flag == false)
+        stack.pop();
     }
 
   }
