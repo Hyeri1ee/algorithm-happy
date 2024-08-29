@@ -39,7 +39,7 @@ public class P1697 {
         }
         //목표값 k와 같은지 확인
         if (next == k) {
-          return  visited[front];
+          return visited[front];
         }
         if (next >= 0 && next < visited.length && visited[next] == 0) {
           q.add(next);
