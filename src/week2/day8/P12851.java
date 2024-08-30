@@ -10,66 +10,64 @@ public class P12851 {
   static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
   static StringBuilder sb = new StringBuilder();
 
-  static int [] visit = new int[100001];
+  static int [] time = new int[100001];
   static int n, k;
+  static int min = Integer.MAX_VALUE;
+  static int count = 0;
 
   public static void main(String[] args) throws Exception{
     StringTokenizer st = new StringTokenizer(bf.readLine());
     n = Integer.parseInt(st.nextToken());
     k = Integer.parseInt(st.nextToken());
 
-    if (n == k)
+    if (n >= k)//수빈이가 동생보다 더 앞에 있을 때
     {
-      sb.append("0\n1");
+      sb.append((n-k)+"\n1");
+      System.out.println(sb);
+      return;
     }else{
       bfs();
+      System.out.println(min);
+      System.out.println(count);
     }
 
-    System.out.println(sb);
+
   }
   public static void bfs() {
-    Queue<Integer> q = new LinkedList<>();
-    q.offer(n);
-    visit[n] = 1; //방문 체크
-    boolean first = true;
-    int result = 0;
-    while(!q.isEmpty()){
-      int front = q.poll();
-      for (int i = 0 ; i < 3 ;i++){
+    Queue<Integer> que = new LinkedList<>();
+    que.offer(n);
+    time[n] = 1;
+    while(!que.isEmpty()){
+      int now = que.poll();
+
+      if (min < time[now])
+        continue;
+
+      for (int i = 0 ; i <3 ;i++){
         int next;
-        if (i == 0){
-          next = front +1;
+        switch (i){
+          case 0: next = now+1; break;
+          case 1: next = now-1; break;
+          default: next = now * 2; break;
         }
-        else if (i ==1){
-          next = front -1;
+        if  (next < 0 || next > 100_000)
+          continue;
 
-        }
-        else
-          next = front * 2;
-
-        //목표값 k와 같은지 확인
         if (next == k){
-          int answer = 0;
-          if (first)
-          {
-            first = false;
-            result++;
-            answer = visit[front];
-            sb.append(answer);
-          }else
-          {
-            if (answer == visit[front])
-              result++;
-          }
-        }
-        if (next >= 0 && next < visit.length && visit[next] == 0) {
-          q.add(next);
-          visit[next] = visit[front] + 1;
+          if (count == 0)
+            min = time[now];
+         if (time[now] == min)
+           count++;
         }
 
+        if (time[next] == 0 ||time[next] == time[now] + 1){
+          que.offer(next);
+          time[next] = time[now] + 1;
+        }
 
       }
-
     }
-  }
-}
+
+
+  }//end of bfs
+}//end of class

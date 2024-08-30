@@ -20,3 +20,7 @@
 - [문자열 자르기,토큰화,배열화](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week1/day6/P9093.md)
 
 - [유기농 배추](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week2/day4/P1012.md)
+
+##### 고민중인 문제
+
+- [P12851] , [P13549]
