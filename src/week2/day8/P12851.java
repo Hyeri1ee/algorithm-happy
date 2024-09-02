@@ -60,7 +60,7 @@ public class P12851 {
            count++;
         }
 
-        if (time[next] == 0 ||time[next] == time[now] + 1){
+        if (time[next] == 0 ||time[next] == time[now] + 1){//중복된 부분을 찾은 것
           que.offer(next);
           time[next] = time[now] + 1;
         }

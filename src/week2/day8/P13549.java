@@ -9,17 +9,17 @@ public class P13549 {
   static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
   static StringBuilder sb = new StringBuilder();
 
-  static int [] visit = new int[100001];
+  static int [] time = new int[100001];
   static int n, k;
-
+  static int min = Integer.MAX_VALUE;
   public static void main(String[] args) throws Exception{
     StringTokenizer st = new StringTokenizer(bf.readLine());
     n = Integer.parseInt(st.nextToken());
     k = Integer.parseInt(st.nextToken());
 
-    if (n == k)
+    if (n >= k)
     {
-      sb.append("0");
+      sb.append((n-k) + "");
     }else{
       bfs();
     }
@@ -27,51 +27,39 @@ public class P13549 {
     System.out.println(sb);
   }
   public static void bfs() {
-    Set<Integer> set = new HashSet<>();
-    Queue<Integer> q = new LinkedList<>();
-    q.offer(n);
-    visit[n] = 1; //방문 체크
-    boolean flag = false; // 순간이동 여부
-    while(!q.isEmpty()){
-      int front = q.poll();
-      for (int i = 0 ; i < 3 ;i++){
-        int next;
-        if (i == 0){
-          flag = false;
-          next = front +1;
+    Queue<Integer> que = new LinkedList<>();
+    que.offer(n);
+    time[n] = 1;
+    while(!que.isEmpty()){
+      int next = 0;
+      int now = que.poll();
+      for (int i =0  ; i <3 ;i++){
+        if (next > 100001 || next < 0)
+          continue;
+        if (min < time[now])
+          continue;
+
+        switch (i){
+          case 0: next= now +1; break;
+          case 1: next = now-1; break;
+          default: next = now * 2; break;
+        }//end of switch
+        if (next == k){
+          min = time[now];
         }
-        else if (i ==1){
-          flag = false;
-          next = front -1;
+        if (time[next] == 0 || time[next] == time[now] + 1){//중복된 부분을 찾은 것
+          que.offer(next);
+          time[next] = time[now] + 1;
         }
-        else{
-          flag = true;
-          next = front * 2;
+        if (time[next] == 0 || time[next] == time[now] + 0){//중복된 부분을 찾은 것
+          que.offer(next);
+          time[next] = time[now];
         }
 
-        //목표값 k와 같은지 확인
-        if (next == k){//단순히 같은지만 비교하면 안됨
-          set.add(visit[front]);
-        }
-        if (next >= 0 && next < visit.length && flag == false) {
-          q.add(next);
-          visit[next] = visit[front] + 1;
-        }
-        if (next >= 0 && next < visit.length && flag == true) {
-          q.add(next);
-          visit[next] = visit[front];
-        }
-        if (next > k*2)
-        {
-          List<Integer> list = new ArrayList<>(set);
-          Collections.sort(list);
-          sb.append(list.get(list.size()-1));
-          return;
-        }
+      }//end of for
+    }//end of while
 
 
-      }
+  }//end of bfs
 
-    }
-  }
-}
+}//end of class
