@@ -18,6 +18,8 @@
 
 - [12751 숨바꼭질2](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week2/day5/P1697.md)
 
+- [15663 n,m (9)](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week3/day2/P15663.md)
+
 ##### tip 정리
 
 - [문자열 자르기,토큰화,배열화](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week1/day6/P9093.md)
