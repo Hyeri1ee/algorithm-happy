@@ -7,7 +7,7 @@
 
 - week 2 : [bfs,dfs](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week2/day1/bfs%2Cdfs.md)
 
-- week 3 : [백트래킹]
+- week 3 : [백트래킹](https://clear-wax-441.notion.site/3-1bcf0f2952714576b7c85345789320fd)
 
 ----
 ##### 기억하고 싶은 문제
@@ -20,6 +20,7 @@
 
 - [15663 n,m (9)](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week3/day2/P15663.md)
 
+- [69870]()
 ##### tip 정리
 
 - [문자열 자르기,토큰화,배열화](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week1/day6/P9093.md)
