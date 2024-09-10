@@ -1,62 +1,48 @@
 package week4.day2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class P1495 {
-  static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-  static int answer;
-  static int[] volume;
-  static int[] dp;
-  static int N, S,M;
-  static ArrayList<Integer> list = new ArrayList<>();
-  public static void main(String[] args) throws  Exception{
-    StringTokenizer st =  new StringTokenizer(bf.readLine());
+  public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
 
-    N = Integer.parseInt(st.nextToken()); //곡의 개수
-    S = Integer.parseInt(st.nextToken()); //시작 볼륨
-    M = Integer.parseInt(st.nextToken()); //최대 볼륨
-    volume = new int[N+1];
-    dp = new int[M+1];
+    int N = sc.nextInt();
+    int S = sc.nextInt();
+    int M = sc.nextInt();
+    int ans = -1;
 
-    st = new StringTokenizer(bf.readLine());
-    for (int i = 0 ; i < N; i++){
-      volume[i] = Integer.parseInt(st.nextToken());
-    }
+    int vol[] = new int[M+1];
+    int change[] = new int[N+1];
 
-    executeByBottomUp();
-  }
+    for(int i=0; i<N; i++) change[i] = sc.nextInt();
 
-  static void executeByBottomUp(){
+    for(int i=0; i<M+1; i++) vol[i] = -1;
 
-    Arrays.fill(dp, -1);
-    dp[S] = 0;
-    int result = -1;
+    vol[S] = 0;
 
-    for(int n=1; n<=N; n++){
-      List<Integer> change = new ArrayList<>();
-      for(int m=0; m<=M; m++){
-        if(dp[m]==n-1){
-          int plus = m+volume[n];
-          int minus = m-volume[n];
+    for(int i=1; i<N+1; i++){
+      List<Integer> changer = new ArrayList<>();
+      for(int j=0; j<M+1; j++){
+        if(vol[j]==i-1){
+          int minus = j-change[i-1];
+          int plus = j+change[i-1];
 
-          if(plus<=M) change.add(plus);
-          if(minus>=0) change.add(minus);
-
+          if(minus>=0){
+            changer.add(minus);
+          }
+          if(plus<=M){
+            changer.add(plus);
+          }
         }
       }
-
-      for(int i=0; i<change.size(); i++){
-        int change_idx = change.get(i);
-        dp[change_idx] = n;
-        if(n==N) result = Math.max(result, change_idx);
-      }
+      for(int k : changer) vol[k] = i;
     }
-    System.out.println(result);
-  }
 
+    for(int i=0; i<M+1; i++){
+      if(vol[i]==N) ans = Math.max(ans, i);
+    }
+
+    System.out.println(ans);
+
+  }
 }
