@@ -1,4 +1,4 @@
-package week4;
+package week4.day1;
 import java.util.Arrays;
 
 public class 입국심사 {
