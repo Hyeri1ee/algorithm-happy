@@ -9,6 +9,8 @@
 
 - week 3 : [백트래킹](https://clear-wax-441.notion.site/3-1bcf0f2952714576b7c85345789320fd)
 
+- week 4 : [이진탐색, DP](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week4/day1/DP_binary.md)
+
 ----
 ##### 기억하고 싶은 문제
 
@@ -26,6 +28,8 @@
 - [문자열 자르기,토큰화,배열화](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week1/day6/P9093.md)
 
 - [동일 문제: dfs, bfs 다른 풀이](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week2/day4/P1012.md)
+
+- [이진탐색 상한,하한 구현](https://github.com/Hyeri1ee/algorithm-8.19-/blob/master/src/week4/day1/Re_BinarySearch.java)
 
 ##### 고민중인 문제
 
