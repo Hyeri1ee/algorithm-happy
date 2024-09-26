@@ -1,4 +1,4 @@
-package week5.day1;
+package week5.day1.최단경로;
 
 import java.util.*;
 import java.io.*;

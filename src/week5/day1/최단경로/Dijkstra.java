@@ -1,4 +1,4 @@
-package week5.day1;
+package week5.day1.최단경로;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,9 +18,9 @@ class Node {
 public class Dijkstra {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    // 노드와 간선의 개수
-    int V = sc.nextInt();
-    int E = sc.nextInt();
+
+    int V = sc.nextInt();//노드
+    int E = sc.nextInt();//간선
     // 출발지점
     int start = sc.nextInt();
 
@@ -37,7 +37,7 @@ public class Dijkstra {
       int b = sc.nextInt();
       int cost = sc.nextInt();
 
-      graph.get(a).add(new Node(b, cost));
+      graph.get(a).add(new Node(b, cost));//a번째(인덱스 번째) ArrayList 에 Node를 추가
     }
 
     // 2. 방문 여부를 확인할 boolean 배열, start 노드부터 end 노드 까지의 최소 거리를 저장할 배열을 만든다.
@@ -76,7 +76,12 @@ public class Dijkstra {
         // 인접 노드를 선택한다.
         Node adjNode = graph.get(nodeIdx).get(j);
         // 인접 노드가 현재 가지는 최소 비용과
-        // 현재 선택된 노드의 값 + 현재 노드에서 인접 노드로 가는 값을 비교하여 더 작은 값으로 갱신한다.
+        // 현재 노드에서 인접 노드로 가는 값을 비교하여 더 작은 값으로 갱신한다.
+        /*
+        dist[adjNode.idx] : 현재 노드에서 인접 노드까지 한 번에 가는 값
+        dist[nodeIdx] + adjNode.cost : 인접 노드까지 nodeIdx 를 거쳐가는 값
+        nodeIdx : 가지 않은 노드의 인덱스 값들 중 하나
+         */
         if (dist[adjNode.idx] > dist[nodeIdx] + adjNode.cost) {
           dist[adjNode.idx] = dist[nodeIdx] + adjNode.cost;
         }
