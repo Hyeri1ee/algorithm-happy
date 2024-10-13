@@ -1,4 +1,4 @@
-package 알고리즘_코딩테스트.day1and2and3;
+package 알고리즘_코딩테스트.day1and2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
