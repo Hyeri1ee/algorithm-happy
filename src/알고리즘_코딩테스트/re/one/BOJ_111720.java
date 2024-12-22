@@ -9,9 +9,10 @@ public class BOJ_111720 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         long answer = 0;
         long num = Integer.parseInt(st.nextToken());
-        Long[] arr = new StringTokenizer(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        char[] arr = st.nextToken().toCharArray();
         for (int i = 0; i < num; i++) {
-            num += Integer.parseInt(st.nextToken());
+            answer += Long.parseLong(arr[i]+"");
         }
         System.out.println(answer);
     }
