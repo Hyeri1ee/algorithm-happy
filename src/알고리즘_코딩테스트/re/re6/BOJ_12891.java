@@ -3,8 +3,8 @@ package 알고리즘_코딩테스트.re.re6;
 import java.util.*;
 import java.io.*;
 public class BOJ_12891{
-  static int[] PassWord = new int[4]; // 입력값 비밀번호 1 0 0 1
-  static int[] MyPassWord = new int[4]; // GATA문자열이 들어오면 짤라서 확인 GA,TA,AT
+  static int[] PassWord = new int[4]; // 비밀번호 규칙
+  static int[] MyPassWord = new int[4]; // 내가 직접 마주하는 임시 비밀번호 규칙
   static int count;
   public static void main(String[] args) throws IOException {
     int result = 0;
@@ -12,10 +12,10 @@ public class BOJ_12891{
 
     StringTokenizer st = new StringTokenizer(br.readLine());
 
-    int length = Integer.parseInt(st.nextToken()); // 총 문자열길이 4
-    int range = Integer.parseInt(st.nextToken()); // 문자열 범위 2
+    int length = Integer.parseInt(st.nextToken()); // 총 문자열길이
+    int range = Integer.parseInt(st.nextToken()); // 만드는 비밀번호 길이
     char[] Dna;
-    Dna = br.readLine().toCharArray(); // GATA문자열이 들어옴
+    Dna = br.readLine().toCharArray(); // 들어오는 총 문자열 길이
     st = new StringTokenizer(br.readLine()); // 1 0 0 1 비밀번호 저장.
     for(int i=0; i<4;i++){
       PassWord[i] = Integer.parseInt(st.nextToken()); // 1 0 0 1 비밀번호를 PassWord배열에 넣음
@@ -39,13 +39,13 @@ public class BOJ_12891{
       int start = j-range;
       int end = j;
       Add(Dna[end]); //GA를 위에서 검증했고 AT를 검증할 차례 하지만 A는 이미 검증되었음으로 확인 X
-      //Add(T)
-
       Remove(Dna[start]); //윈도우 슬라이딩임으로 GA -> AT로 넘어가야 하기 떄문에 G의 값을 삭제 시켜준다.
       if(count==4) result++;
     }
     System.out.println(result);
   }
+
+
   public static void Remove(char c){
 
     switch(c){
@@ -66,7 +66,6 @@ public class BOJ_12891{
       case 'G':{
         //GA값은 1 0 1 0 이였다. 1 0 0 1 값과 비교한다.
         //G의 자리 수를 서로 비교함. 1 , 0임으로 if는 false
-
         if(MyPassWord[2]==PassWord[2]){
           count--;
         }
@@ -74,8 +73,6 @@ public class BOJ_12891{
         break;
       }
       case 'T':{
-
-
         if(MyPassWord[3]==PassWord[3]){
           count--;
         }
