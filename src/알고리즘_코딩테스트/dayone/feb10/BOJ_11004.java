@@ -23,20 +23,20 @@ public class BOJ_11004 {
       arr[i] = Integer.parseInt(st.nextToken());
     }
 
-    Integer[] boxedArray = Arrays.stream(arr)
-            .boxed()
-            .toArray(Integer[]::new);
-    Arrays.sort(boxedArray);
+//    Integer[] boxedArray = Arrays.stream(arr)
+//            .boxed()
+//            .toArray(Integer[]::new);
+//    Arrays.sort(boxedArray);
+//    System.out.println(boxedArray[k-1]);
 
-//    quicksort(0, n-1);
-
-    System.out.println(boxedArray[k-1]);
+    quicksort(0, n-1);
+    System.out.println(arr[k-1]);
 
   }
   private static void quicksort(int start, int end) {//start,end는 인덱스
     if (start >= end) return;
 
-    int pivot = partition(start, end);
+    int pivot = partition(start, end); //partition함수는 피봇값이 들어갈 인덱스 반환
 
     quicksort(start, pivot - 1);
     quicksort(pivot + 1, end);
