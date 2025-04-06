@@ -25,13 +25,11 @@ public class Main {
             case 1:{//동쪽으로 이동
                 if (y + 1 < m){
                     newy +=1;
-                    int a = cube[0];
-                    int b = cube[1];
-                    int c = cube[2];
-                    int d = cube[3];
-                    int e = cube[4];
-                    int f = cube[5];
-                    cube  = new int[]{b,c,d,a,e,f};
+                    int temp = cube[0];
+                    cube[0] = cube[1];
+                    cube[1] = cube[2];
+                    cube[2] = cube[3];
+                    cube[3] = temp;
                     System.out.println(cube[2]);
                 }
                 return new  int[]{newx, newy};
@@ -39,13 +37,11 @@ public class Main {
             case 2:{//서쪽으로 이동
                 if (y-1 >= 0){
                     newy -=1;
-                    int a = cube[0];
-                    int b = cube[1];
-                    int c = cube[2];
-                    int d = cube[3];
-                    int e = cube[4];
-                    int f = cube[5];
-                    cube = new int[]{d,a,b,c,e,f};
+                    int temp = cube[0];
+                    cube[0] = cube[3];
+                    cube[3] = cube[2];
+                    cube[2] = cube[1];
+                    cube[1] = temp;
                     System.out.println(cube[2]);
                 }
                 return new  int[]{newx, newy};
@@ -53,13 +49,11 @@ public class Main {
             case 3:{//북쪽으로 이동
                 if (x-1 >= 0){
                     newx -= 1;
-                    int a = cube[0];
-                    int b = cube[1];
-                    int c = cube[2];
-                    int d = cube[3];
-                    int e = cube[4];
-                    int f = cube[5];
-                    cube = new int[]{f,b,e,d,a,c};
+                    int temp = cube[0];
+                    cube[0] = cube[5];
+                    cube[5] = cube[2];
+                    cube[2] = cube[4];
+                    cube[4] = temp;
                     System.out.println(cube[2]);
                 }
                 return new  int[]{newx, newy};
@@ -67,13 +61,11 @@ public class Main {
             case 4:{//남쪽으로 이동
                 if (x+1 < n){
                     newx +=1;
-                    int a = cube[0];
-                    int b = cube[1];
-                    int c = cube[2];
-                    int d = cube[3];
-                    int e = cube[4];
-                    int f = cube[5];
-                    cube = new int[]{e,b,f,d,c,a};
+                    int temp = cube[0];
+                    cube[0] = cube[4];
+                    cube[4] = cube[2];
+                    cube[2] = cube[5];
+                    cube[5] = temp;
                     System.out.println(cube[2]);
                 }
                 return new  int[]{newx, newy};
@@ -103,25 +95,21 @@ public class Main {
 
     private static void solve(){
         //굴리기 시행 횟수 만큼
-        int bottom = 0;
 
         for(int i = 0 ; i < k; i++ ){
 
             //정육면체 회전
-            boolean didntmove = false;
+            boolean didntmove;
             int[] newone = move(x,y,direc[i]);
-            if ( !(newone[0] == x && newone[1] == y )){
+            if ( ! (newone[0] == x && newone[1] == y) ){
                 x = newone[0];
                 y = newone[1];
+                didntmove = false;
             }else{
                 didntmove = true;
             }
-
-            if (newone != null){
-                //칸에 숫자와 정육면체 값 교환
-                exchange(x,y, didntmove);//정육면체 위치x, 정육면체 위치y, cube[] 칸과 맞닿은 맨 아래 인덱스
-
-            }
+            //칸에 숫자와 정육면체 값 교환
+            exchange(x,y, didntmove);//정육면체 위치x, 정육면체 위치y, cube[] 칸과 맞닿은 맨 아래 인덱스
 
         }
     }
