@@ -30,7 +30,6 @@ public class Main {
                     cube[1] = cube[2];
                     cube[2] = cube[3];
                     cube[3] = temp;
-                    System.out.println(cube[2]);
                 }
                 return new  int[]{newx, newy};
             }
@@ -42,7 +41,6 @@ public class Main {
                     cube[3] = cube[2];
                     cube[2] = cube[1];
                     cube[1] = temp;
-                    System.out.println(cube[2]);
                 }
                 return new  int[]{newx, newy};
             }
@@ -54,7 +52,6 @@ public class Main {
                     cube[5] = cube[2];
                     cube[2] = cube[4];
                     cube[4] = temp;
-                    System.out.println(cube[2]);
                 }
                 return new  int[]{newx, newy};
             }
@@ -66,7 +63,6 @@ public class Main {
                     cube[4] = cube[2];
                     cube[2] = cube[5];
                     cube[5] = temp;
-                    System.out.println(cube[2]);
                 }
                 return new  int[]{newx, newy};
             }
@@ -76,7 +72,7 @@ public class Main {
     }
     //change
     private static void exchange(int x, int y, boolean didntmove){
-        if (!didntmove){
+        if (!didntmove){//움직였으면
 
             int kanvalue = kan[x][y];
             if (kanvalue == 0)//칸 값이 0이면 정육면체 cube[cubebottomindex]값을 복사
@@ -87,6 +83,7 @@ public class Main {
                 cube[0] = kanvalue;
                 kan[x][y] = 0;
             }
+            System.out.println(cube[2]);
         }
 
     }
@@ -110,6 +107,7 @@ public class Main {
             }
             //칸에 숫자와 정육면체 값 교환
             exchange(x,y, didntmove);//정육면체 위치x, 정육면체 위치y, cube[] 칸과 맞닿은 맨 아래 인덱스
+
 
         }
     }
